@@ -1,47 +1,34 @@
-pipeline
+pipeline 
 {
-    agent {label 'jenkins_node'}
+    agent {label 'jenkins_node'} 
     stages
     {
-        stage ('git') 
+    stage ('git')
+    {    
+        steps 
         {
-            steps
-            {
-            git branch: 'main', url: 'https://github.com/waleedKotyb/eduWeb.git'
-            }
-            
+        git branch: 'main', url: 'https://github.com/Mohamed-Gamal92/eduWeb.git'
         }
-        
-        stage ('artifact')
+    }
+    stage ('artifact')
+    {
+        steps 
         {
-            steps
-            {
-            sh ' tar -cf web.tar * '
-            archiveArtifacts artifacts: 'web.tar', fingerprint: true
-            }
-            
+        sh ' tar -cf web.tar * '
+        archiveArtifacts artifacts: 'web.tar', fingerprint: true
         }
-        
-        stage ('deploy')
+    }
+    stage ('deploy') 
+    {
+        agent {label 'slave'}
+        steps 
         {
-            agent {label 'slave_1'}
-            steps 
-            {
-                copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: env.JOB_NAME , selector: lastSuccessful(), target: '/var/www/html'
+            copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: env.JOB_NAME , selector: lastSuccessful(), target: '/var/www/html'
                 sh '''
                 cd /var/www/html/ && rm -f index.html
                 tar -xvf /var/www/html/web.tar -C /var/www/html/
                 '''
-                
-                
-                
-            }
-            
         }
-    }
-        
-        
-        
-        
-        
-    }
+}
+}
+}
