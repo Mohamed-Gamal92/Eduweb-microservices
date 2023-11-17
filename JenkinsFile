@@ -24,12 +24,7 @@ pipeline
         steps 
             {
                 copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: 'test_eduweb' , selector: lastSuccessful(), target: '/var/www/html/'
-                sh '''
-                hostname
-                echo 'Devops'
-                cd /var/www/html/ && rm -f index.html
-                tar -xvf /var/www/html/web.tar -C /var/www/html/
-                '''
+                sh 'hostname'
         }
 }
 }
