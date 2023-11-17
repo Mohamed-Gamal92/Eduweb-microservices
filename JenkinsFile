@@ -14,7 +14,7 @@ pipeline
     {
         steps 
         {
-        sh ' tar -cf web.tar * '
+        sh 'tar -cf web.tar * '
         archiveArtifacts artifacts: 'web.tar', fingerprint: true
         }
     }
@@ -22,11 +22,12 @@ pipeline
     {
         agent {label 'last'}
         steps 
-        {
-            copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: env.JOB_NAME, selector: lastSuccessful(), target: '/var/www/html/'
-                sh 'hostname'
-                sh 'pwd'
-                            
+            {
+                copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: 'edu-pipeline' , selector: lastSuccessful(), target: '/var/www/html/'
+                sh '''
+                cd /var/www/html/ && rm -f index.html
+                tar -xvf /var/www/html/web.tar -C /var/www/html/
+                '''
         }
 }
 }
