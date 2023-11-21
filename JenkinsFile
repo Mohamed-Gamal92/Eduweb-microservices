@@ -23,7 +23,7 @@ pipeline
         agent {label 'last'}
         steps 
             {
-                copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: 'edu-pipeline' , selector: lastSuccessful(), target: '/var/www/html/'
+                copyArtifacts filter: 'web.tar', fingerprintArtifacts: true, projectName: env.JOB_NAME , selector: lastSuccessful(), target: '/var/www/html/'
                 sh '''
                 hostname
                 ip a
