@@ -1,0 +1,18 @@
+# نستخدم Nginx جاهز
+FROM nginx:alpine
+
+# نمسح ال config الافتراضي
+RUN rm /etc/nginx/conf.d/default.conf
+
+# ننسخ ملفات الموقع
+COPY . /usr/share/nginx/html
+
+# ننسخ إعدادات nginx (اختياري لو عايز البورت 9000 بدل 80)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+
+EXPOSE 9000
+
+
+CMD ["nginx", "-g", "daemon off;"]
+

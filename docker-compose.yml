@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  eduweb:
+    image: malek10/eduweb:latest
+    container_name: eduweb_app
+    ports:
+      - "80:80"   # Container الأول على 8080
+    restart: always
+
+  vm2test:
+    build:
+      context: ./vm2-test
+    container_name: vm2_test_app
+    ports:
+      - "8081:80"   # Container التاني على 8081
+    restart: always
