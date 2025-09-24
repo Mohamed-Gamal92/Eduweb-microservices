@@ -1,0 +1,29 @@
+
+# 📄 2. .gitignore
+```gitignore
+# Logs
+*.log
+
+# Docker files
+*.pid
+*.seed
+*.bak
+
+# Build artifacts
+dist/
+build/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Node.js dependencies
+node_modules/
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# OS generated files
+.DS_Store
+Thumbs.db
