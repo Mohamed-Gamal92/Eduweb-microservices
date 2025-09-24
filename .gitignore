@@ -1,29 +1,51 @@
-
-# 📄 2. .gitignore
-```gitignore
-# Logs
-*.log
-
-# Docker files
-*.pid
-*.seed
+# =========================
+# OS / Editor Files
+# =========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
 *.bak
+*.orig
 
-# Build artifacts
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# =========================
+# Docker
+# =========================
+.docker/
+docker-compose.override.yml
+docker-compose.override.yaml
+
+# Avoid committing Docker local volumes
+**/data/
+**/tmp/
+**/cache/
+
+# =========================
+# Node / Vendor (if added later)
+# =========================
+node_modules/
+vendor/
+
+# =========================
+# Build / Dist
+# =========================
 dist/
 build/
 
-# Python cache
-__pycache__/
-*.pyc
+# =========================
+# Git / Env
+# =========================
+.env
+.env.local
+.env.*.local
 
-# Node.js dependencies
-node_modules/
-
-# IDE/editor configs
-.vscode/
-.idea/
-
-# OS generated files
-.DS_Store
-Thumbs.db
